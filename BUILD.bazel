@@ -1,0 +1,44 @@
+# - bring in theme (copy_to_bin)
+# - copy over source (copy_to_bin)
+# - reference package.json and other workspace for deps/targets
+# - set up ibazel 
+load("@build_bazel_rules_nodejs//:index.bzl", "copy_to_bin")
+load("@npm//serve:index.bzl", "serve")
+load("@npm//hexo:index.bzl", "hexo")
+package(default_visibility=["//visibility:public"])
+
+# set up alias from shared tsconfig
+alias(
+  name = "tsconfig.json",
+  actual = "@dpu_dewalt_toolbag//:tsconfig.json"
+)
+
+serve(
+  name = "serve",
+  templated_args = ["public"]
+)
+
+hexo(
+  name = "generate",
+  data = [
+    "@npm//:node_modules",
+    "@dpu_hexo_wrenches//github-include"
+  ],
+  templated_args = ["generate", "--force"]
+)
+
+copy_to_bin(
+  name = "theme",
+  srcs = ["@dpu_hexo_theme_pipes//:theme"]
+)
+
+copy_to_bin(
+  name = "site_files",
+  srcs = glob([
+    "source/**",
+    "scaffolds/*",
+    "_config.yaml",
+    "package.json"
+  ])
+)
+

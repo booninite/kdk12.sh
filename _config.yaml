@@ -1,0 +1,23 @@
+timezone: America/New_York
+root: /
+permalink: posts/:abbrlink/
+pretty_urls:
+  trailing_index: false
+  trailing_html: false
+meta_generator: true
+index_generator:
+  path: ""
+  per_page: 10
+  order_by: -date
+title: shimmerjs
+description: emitting bits
+keywords: k3s, k8s, kubernetes, typescript, software engineering, complaining,
+  shimmerjs, hi mom
+url: emitbits.io
+theme: cactus
+theme_config:
+  colorscheme: ayulight
+  highlight: darkula
+  nav:
+    Home: /
+    The Union: https://github.com/digital-plumbers-union/
