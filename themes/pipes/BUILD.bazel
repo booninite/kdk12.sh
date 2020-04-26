@@ -1,0 +1,12 @@
+package(default_visibility=["//visibility:public"])
+
+filegroup(
+  name = "pipes",
+  srcs = glob([
+    "languages/**",
+    "layout/**",
+    "scripts/**",
+    "source/**",
+    "_config.yaml"
+  ])
+)

@@ -3,8 +3,8 @@
 # - reference package.json and other workspace for deps/targets
 # - set up ibazel 
 load("@build_bazel_rules_nodejs//:index.bzl", "copy_to_bin")
-load("@npm//serve:index.bzl", "serve")
 load("@npm//hexo:index.bzl", "hexo")
+load("@npm//browser-sync:index.bzl", "browser_sync")
 package(default_visibility=["//visibility:public"])
 
 # set up alias from shared tsconfig
@@ -13,26 +13,7 @@ alias(
   actual = "@dpu_dewalt_toolbag//:tsconfig.json"
 )
 
-serve(
-  name = "serve",
-  templated_args = ["public"]
-)
-
-hexo(
-  name = "generate",
-  data = [
-    "@npm//:node_modules",
-    "@dpu_hexo_wrenches//github-include"
-  ],
-  templated_args = ["generate", "--force"]
-)
-
-copy_to_bin(
-  name = "theme",
-  srcs = ["@dpu_hexo_theme_pipes//:theme"]
-)
-
-copy_to_bin(
+filegroup(
   name = "site_files",
   srcs = glob([
     "source/**",
@@ -40,5 +21,28 @@ copy_to_bin(
     "_config.yaml",
     "package.json"
   ])
+)
+
+deps = [
+  "@npm//:node_modules",
+  # hexo can't find the plugin because it can't crawl node_modules dir and find 
+  # it.  using local yarn dependencies via `file:` to get around that
+  # non-node deps that we want to retrigger builds
+  "//themes/pipes",
+  "//:_config.yaml",
+  "//:site_files"
+]
+
+hexo(
+  name = "generate",
+  data = deps,
+  templated_args = ["generate", "--force"]
+)
+
+browser_sync(
+  name = "serve",
+  # TODO: figure out how to use bazel make variables here to avoid hardcoding bazel-out path
+  #       see: https://docs.bazel.build/versions/master/be/make-variables.html#predefined_label_variables
+  templated_args = ["/Users/shimmerjs/kdk12.sh/bazel-out/darwin-fastbuild/bin/generate.sh.runfiles/kdk12_sh/public", "-w"]
 )
 

@@ -1,23 +1,33 @@
-timezone: America/New_York
+title: shimmerjs
+url: kdk12.sh
+description: i think it might be a good idea if you leave your radio on all the time now.
+keywords: k3s, k8s, kubernetes, typescript, software engineering, complaining,
+  shimmerjs, hi mom
+
+
 root: /
+
 permalink: posts/:abbrlink/
+
 pretty_urls:
   trailing_index: false
   trailing_html: false
-meta_generator: true
+
+  meta_generator: true
+
 index_generator:
   path: ""
   per_page: 10
   order_by: -date
-title: shimmerjs
-description: emitting bits
-keywords: k3s, k8s, kubernetes, typescript, software engineering, complaining,
-  shimmerjs, hi mom
-url: emitbits.io
-theme: cactus
+
+theme: pipes
 theme_config:
   colorscheme: ayulight
   highlight: darkula
+  post:
+    show_updated: false
   nav:
     Home: /
     The Union: https://github.com/digital-plumbers-union/
+
+timezone: America/New_York

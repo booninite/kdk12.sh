@@ -7,9 +7,11 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@bazel/typescript": "^1.6.0",
+    "@dpu/hexo-github-include": "link:/Users/shimmerjs/dev/dpu/hexo-github-include",
     "@types/hexo": "^3.8.3",
     "@types/hexo-util": "^0.6.2",
     "@types/node": "^13.13.0",
+    "browser-sync": "^2.26.7",
     "hexo": "4.2.0",
     "hexo-abbrlink": "2.0.5",
     "hexo-browsersync": "0.3.0",
@@ -22,7 +24,6 @@
     "hexo-renderer-marked": "2.0.0",
     "hexo-renderer-stylus": "1.1.0",
     "hexo-util": "1.9.0",
-    "serve": "^11.3.0",
     "typescript": "^3.8.3"
   }
 }
